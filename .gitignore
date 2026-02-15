@@ -4,8 +4,9 @@
 # Memory (private session data)
 memory/
 
-# Local tool config (API keys, wallet addresses)
-TOOLS.md
+# Secrets
+.env
+.env.*
 
 # IDE
 .vscode/
