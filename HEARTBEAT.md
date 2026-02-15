@@ -14,6 +14,7 @@ On each heartbeat, check what's due based on `memory/heartbeat-state.json` times
 - [ ] IV vs RV comparison: any significant divergence?
 - [ ] Funding rates: cost/income on any perpetual hedges
 - [ ] Gas prices: favorable for pending rebalances?
+- [ ] Hot wallet balance: sufficient ETH for gas? Above/below max balance target?
 
 ### Every 4 hours
 - [ ] Greeks snapshot: update `portfolio/greeks-snapshot.md`
@@ -35,3 +36,5 @@ On each heartbeat, check what's due based on `memory/heartbeat-state.json` times
 - Deribit margin utilization >80%
 - Pool TVL drops >20% in 24h
 - Smart contract exploit or governance attack on a pool's protocol
+- Hot wallet balance drops below gas buffer threshold
+- Unexpected transaction on hot wallet (not initiated by QuantBot)

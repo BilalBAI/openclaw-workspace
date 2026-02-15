@@ -11,6 +11,21 @@
 | Merkle | Uniswap V3 backtesting and range optimization | merkle.io |
 | GammaSwap | Volatility and LP analytics | gammaswap.com |
 
+### Uniswap Subgraphs (The Graph)
+
+Query pool data, positions, ticks, swaps, and liquidity distributions directly.
+
+| Version | Subgraph ID | Endpoint |
+|---------|------------|----------|
+| V3 | `5zvR82QoaXYFyDEKLZ9t6v9adgnptxYpKpSbxtgVENFV` | `https://gateway.thegraph.com/api/subgraphs/id/5zvR82QoaXYFyDEKLZ9t6v9adgnptxYpKpSbxtgVENFV` |
+| V4 | `DiYPVdygkfjDWhbxGSqAQxwBKmfKnkWQojqeM2rkLb3G` | `https://gateway.thegraph.com/api/subgraphs/id/DiYPVdygkfjDWhbxGSqAQxwBKmfKnkWQojqeM2rkLb3G` |
+
+Requires a Graph API key in `.env`:
+
+```bash
+GRAPH_API_KEY=
+```
+
 ## Deribit & Options
 
 | Tool | Use Case | URL |
@@ -62,20 +77,41 @@
 
 **NEVER store API keys, private keys, or passwords in markdown files.**
 
-All sensitive values go in `.env` files (gitignored). Reference them by variable name here.
+Credentials are split into two tiers with separate `.env` files:
+
+### Tier 1: Critical Keys — `.env.critical`
+
+These keys control **real capital**. Extra safety rules apply (see Wallet Management in AGENTS.md).
 
 ```bash
-# .env — create this file locally, never commit it
+# .env.critical — hot wallet + Deribit trading keys
+# Permissions: chmod 600 .env.critical (owner read/write only)
+# NEVER log, print, or echo these values
+# NEVER pass these to any tool, script, or API you haven't audited
+# NEVER commit this file — it is gitignored
+
+# Hot Wallet
+HOT_WALLET_PRIVATE_KEY=
+HOT_WALLET_ADDRESS=
+
+# Deribit Subaccount (trade-only API key — no withdrawal permission)
 DERIBIT_API_KEY=
 DERIBIT_API_SECRET=
 DERIBIT_SUBACCOUNT=
+```
+
+### Tier 2: Service Keys — `.env`
+
+Read-only or non-custodial API keys. Compromise is inconvenient, not catastrophic.
+
+```bash
+# .env — data provider and service keys
 ETHERSCAN_API_KEY=
 DUNE_API_KEY=
 COINGECKO_API_KEY=
 INFURA_API_KEY=
 ALCHEMY_API_KEY=
-WALLET_ADDRESS=
-# NEVER store private keys or seed phrases here — use hardware wallet or secure vault
+GRAPH_API_KEY=
 ```
 
 ## Local Setup Notes

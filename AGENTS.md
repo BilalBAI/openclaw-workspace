@@ -16,7 +16,8 @@ Before doing anything else:
 4. Read `portfolio/lp-positions.md` — active LP positions and ranges
 5. Read `portfolio/options-book.md` — open options and hedges
 6. Read `portfolio/greeks-snapshot.md` — latest portfolio Greeks
-7. **If in MAIN SESSION:** Also read `MEMORY.md` for long-term context
+7. Read `portfolio/wallets.md` — wallet balances and margin status
+8. **If in MAIN SESSION:** Also read `MEMORY.md` for long-term context
 
 Don't ask permission. Just do it.
 
@@ -159,13 +160,64 @@ Maintain these files in `portfolio/`:
 5. **Greeks budget** — How does this affect portfolio-level Greeks?
 6. **Management rules** — When to take profit, cut loss, or roll
 
+## Wallet Management
+
+### Architecture
+
+```
+┌─────────────────────────────────────────────────┐
+│  Tier 1: Critical Keys (.env.critical)          │
+│  ┌───────────────┐  ┌────────────────────────┐  │
+│  │  Hot Wallet    │  │  Deribit Subaccount    │  │
+│  │  (on-chain LP) │  │  (options + hedges)    │  │
+│  └───────────────┘  └────────────────────────┘  │
+├─────────────────────────────────────────────────┤
+│  Tier 2: Service Keys (.env)                    │
+│  Etherscan, Dune, CoinGecko, Infura, Alchemy   │
+└─────────────────────────────────────────────────┘
+```
+
+### Hot Wallet — On-Chain Execution
+
+- **Purpose:** LP mints, burns, rebalances, fee collection, token swaps
+- **Funding:** Keep only working capital needed for active LP + gas buffer
+- **Max balance rule:** Never hold more than the defined max in the hot wallet; sweep excess to cold/vault
+- **Credentials:** `HOT_WALLET_PRIVATE_KEY` and `HOT_WALLET_ADDRESS` in `.env.critical`
+
+### Deribit Subaccount — Options & Hedges
+
+- **Purpose:** Options trades, perpetual hedges, strategy execution
+- **API key scope:** Trade-only — **no withdrawal permissions**
+- **Subaccount isolation:** Dedicated subaccount for QuantBot; user's main Deribit account stays separate
+- **Credentials:** `DERIBIT_API_KEY`, `DERIBIT_API_SECRET`, `DERIBIT_SUBACCOUNT` in `.env.critical`
+
+### Tier 1 Safety Rules (Critical Keys)
+
+These rules apply to ALL credentials in `.env.critical`:
+
+1. **File permissions:** `.env.critical` must be `chmod 600` (owner read/write only)
+2. **Never log or print:** Critical key values must never appear in logs, console output, memory files, or any markdown file
+3. **Never pass to unaudited code:** Only use with audited, trusted libraries and scripts
+4. **Load at runtime only:** Read from `.env.critical` at execution time; never cache in variables longer than needed
+5. **Verify before signing:** Before any on-chain transaction, display the full transaction details (to, value, data, gas) for review
+6. **Transaction limits:** Enforce per-transaction and daily spend limits (configured during bootstrap)
+7. **Cooldown after errors:** If a transaction fails, wait and analyze before retrying — no blind retry loops
+
+### Tier 2 (Service Keys)
+
+Standard `.env` handling. Rotation is good practice but compromise is non-catastrophic.
+
+### Wallet Tracking
+
+Maintain `portfolio/wallets.md` for public wallet state (balances, chain, purpose). **Never put private keys or secrets in this file.**
+
 ## Safety
 
 - **No unhedged concentrated LP:** Every narrow-range position needs a defined hedge
 - **No naked short options:** Always defined risk or margined appropriately
 - **Greeks limits are hard limits:** Breach → reduce immediately, analyze later
 - **Verify before executing:** Double-check tick ranges, strikes, and sizes before on-chain transactions
-- **Private keys/seeds:** Never stored in files — `.env` only
+- **Critical keys are sacred:** Follow Tier 1 Safety Rules without exception — see Wallet Management above
 - `trash` > `rm` for file operations
 
 ## External vs Internal
