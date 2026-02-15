@@ -3,9 +3,11 @@
 _All executed trades with rationale and outcomes._
 
 <!-- Format:
-### YYYY-MM-DD | [BUY/SELL] [ASSET] | [Size]
-- Price: $X
-- Thesis: [why]
-- Result: [P&L if closed]
+### YYYY-MM-DD HH:MM | [ACTION] | [INSTRUMENT]
+- Details: [specifics — pool/strike/expiry/size]
+- Rationale: [why]
+- Greeks impact: Δ [before → after], Γ [before → after]
+- Gas/fees: $X
+- Result: [if closed: PnL breakdown — fees, IL, hedge, net]
 - Lessons: [what did we learn]
 -->

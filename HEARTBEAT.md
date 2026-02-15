@@ -1,33 +1,37 @@
 # HEARTBEAT.md
 
-## Market Monitoring Checklist
+## Position Monitoring Checklist
 
 On each heartbeat, check what's due based on `memory/heartbeat-state.json` timestamps:
 
-### Every 30 minutes
-- [ ] Portfolio positions: any approaching stops or targets?
-- [ ] BTC/ETH price action: significant moves (>2% in 1h)?
-- [ ] Funding rates: extreme readings on major pairs?
+### Every 15 minutes
+- [ ] LP range check: is price in range for all active positions?
+- [ ] Portfolio net delta: within ±5% notional limit?
+- [ ] Deribit margin: sufficient margin for all open positions?
 
-### Every 2 hours
-- [ ] Top movers scan: what's pumping/dumping and why?
-- [ ] Stablecoin flows: USDT/USDC mint/burn activity
-- [ ] Exchange inflow/outflow anomalies
+### Every 1 hour
+- [ ] Fee accrual update: fees earned since last check
+- [ ] IV vs RV comparison: any significant divergence?
+- [ ] Funding rates: cost/income on any perpetual hedges
+- [ ] Gas prices: favorable for pending rebalances?
 
-### Every 6 hours
-- [ ] Macro calendar: upcoming events in next 12h?
-- [ ] DeFi yield check: significant changes in farming positions?
-- [ ] Governance votes: any active votes on held protocols?
-- [ ] Watchlist review: any watchlist assets hitting entry zones?
+### Every 4 hours
+- [ ] Greeks snapshot: update `portfolio/greeks-snapshot.md`
+- [ ] Vol surface scan: term structure and skew changes
+- [ ] Pool health: TVL changes, volume trends for active pools
+- [ ] Options expiry check: anything expiring within 48h?
 
 ### Daily (once per day)
-- [ ] Portfolio performance summary
-- [ ] Market regime check: has anything shifted?
-- [ ] Thesis review: any theses need updating?
+- [ ] Full PnL attribution: fees, IL, hedge PnL, gas costs, net
+- [ ] Strategy performance review: which positions are carrying, which are bleeding
+- [ ] Vol regime assessment: has the regime shifted?
 - [ ] Memory maintenance: distill daily notes into MEMORY.md
 
 ### Alert immediately (regardless of schedule)
-- Position hits stop loss or take profit
-- Major protocol exploit or hack
-- Surprise macro event (emergency rate decision, major regulatory action)
-- Flash crash or extreme volatility (>10% move in BTC/ETH in <1h)
+- Price exits LP range
+- Portfolio delta breaches ±5% limit
+- Option within 4h of expiry with no roll plan
+- Vol spike >20% in 1h
+- Deribit margin utilization >80%
+- Pool TVL drops >20% in 24h
+- Smart contract exploit or governance attack on a pool's protocol
