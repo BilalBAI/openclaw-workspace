@@ -1,0 +1,12 @@
+# OS
+.DS_Store
+
+# Memory (private session data)
+memory/
+
+# Local tool config (API keys, wallet addresses)
+TOOLS.md
+
+# IDE
+.vscode/
+.idea/
