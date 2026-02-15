@@ -1,0 +1,72 @@
+{
+  "bitcoin": {
+    "usd": 65787,
+    "usd_24h_change": -2.591447894379572,
+    "last_check_price": 65787,
+    "last_check_time": "2026-02-12T20:00:00Z",
+    "yesterday_price": 67642
+  },
+  "ethereum": {
+    "usd": 1924.33,
+    "usd_24h_change": -1.3877615327939372,
+    "last_check_price": 1924.33,
+    "last_check_time": "2026-02-12T20:00:00Z",
+    "yesterday_price": 1965.64
+  },
+  "solana": {
+    "usd": 77.61,
+    "usd_24h_change": -2.653654451189703,
+    "last_check_price": 77.61,
+    "last_check_time": "2026-02-12T20:00:00Z",
+    "yesterday_price": 80.36
+  },
+  "binancecoin": {
+    "usd": 607.93,
+    "usd_24h_change": -0.3834901084378844,
+    "last_check_price": 607.93,
+    "last_check_time": "2026-02-12T20:00:00Z",
+    "yesterday_price": 611.43
+  },
+  "ripple": {
+    "usd": 1.36,
+    "usd_24h_change": -0.9573927155045155,
+    "last_check_price": 1.36,
+    "last_check_time": "2026-02-12T20:00:00Z",
+    "yesterday_price": 1.38
+  },
+  "dogecoin": {
+    "usd": 0.091719,
+    "usd_24h_change": 0.7678145026271255,
+    "last_check_price": 0.091719,
+    "last_check_time": "2026-02-12T20:00:00Z",
+    "yesterday_price": 0.091547
+  },
+  "uniswap": {
+    "usd": 3.23,
+    "usd_24h_change": -7.554025092871575,
+    "last_check_price": 3.23,
+    "last_check_time": "2026-02-12T20:00:00Z",
+    "yesterday_price": 3.41
+  },
+  "aave": {
+    "usd": 110.89,
+    "usd_24h_change": 2.8605988780452045,
+    "last_check_price": 110.89,
+    "last_check_time": "2026-02-12T20:00:00Z",
+    "yesterday_price": 108.81
+  },
+  "lido-dao": {
+    "usd": 0.334082,
+    "usd_24h_change": 1.106446366560849,
+    "last_check_price": 0.334082,
+    "last_check_time": "2026-02-12T20:00:00Z",
+    "yesterday_price": 0.332856
+  },
+  "hyperliquid": {
+    "usd": 29.74,
+    "usd_24h_change": 0.7645959372823083,
+    "last_check_price": 29.74,
+    "last_check_time": "2026-02-12T20:00:00Z",
+    "yesterday_price": 30.26
+  }
+}
