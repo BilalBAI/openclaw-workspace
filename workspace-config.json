@@ -1,6 +1,6 @@
 {
-  "radar_path": null,
-  "amm_trading_suite_path": null,
-  "radar_db_path": null,
-  "discovered_at": null
+  "radar_path": "/home/bilal/Documents/radar",
+  "amm_trading_suite_path": "/home/bilal/Documents/amm-trading-suite",
+  "radar_db_path": "/home/bilal/Documents/radar/radar.db",
+  "discovered_at": "2026-03-15T15:35:00-05:00"
 }

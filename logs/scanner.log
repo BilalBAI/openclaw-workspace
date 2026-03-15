@@ -1,0 +1,24 @@
+[1/6] Fetching spot and DVOL...
+  [warn] Binance failed: 451 Client Error:  for url: https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT
+  ETH spot: $2,186.98  |  Deribit idx: $2,186.98  |  DVOL: 76.5%
+
+[2/6] Fetching instrument list (all active expiries)...
+  564 instruments across 12 expiries: 16MAR26, 17MAR26, 18MAR26, 19MAR26, 20MAR26, 27MAR26, 3APR26, 24APR26, 29MAY26, 26JUN26, 25SEP26, 25DEC26
+
+[3/6] Fetching order books (564 instruments, max 10 concurrent)...
+  [warn] Giving up on ETH-24APR26-1500-C after retries (rate limited)
+  [warn] Giving up on ETH-24APR26-3000-P after retries (rate limited)
+  [warn] Giving up on ETH-3APR26-2600-C after retries (rate limited)
+  [warn] Giving up on ETH-27MAR26-1600-C after retries (rate limited)
+  560 records received.
+
+[Scanner] 560 instruments saved to DB radar.db  (run_id=3)
+
+[4/6] Syncing Deribit trade history...
+  0 trades fetched  |  0 new  |  0 already synced
+
+[5/6] Fitting Wing vol surface...
+  12 expiries fitted → vol_surface_fits  (run_id=3)
+
+[6/6] Done.  run_id=3
+[2026-03-15T18:00:34-05:00] Scanner completed

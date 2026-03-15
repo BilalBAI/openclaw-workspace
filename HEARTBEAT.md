@@ -4,20 +4,28 @@ All checks use radar and amm-trading-suite via CLI. Read `workspace-config.json`
 
 ---
 
-## Hourly (Post-Scanner Batch)
+## Cron Jobs (Auto-Running)
 
-Run these in sequence — each step depends on the previous one.
+Scanner and monitor run automatically via cron:
+- **:00** — `python -m radar.scanner --db radar.db`
+- **:05** — `python run_monitor.py --db radar.db`
 
-### 1. Refresh market data
+Logs: `/home/bilal/.openclaw/workspace/logs/`
+
+---
+
+## Hourly (Read Cron Results)
+
+### 1. Check latest scan results
+Query radar.db for most recent `scan_runs` and `pnl_attribution`:
 ```bash
-cd <radar_path> && python -m radar.scanner --db <radar.db>
+cd <radar_path> && source .venv/bin/activate
+sqlite3 radar.db "SELECT id, scanned_at, spot, dvol FROM scan_runs ORDER BY id DESC LIMIT 2;"
+sqlite3 radar.db "SELECT * FROM pnl_attribution ORDER BY run_id_t2 DESC LIMIT 1;"
 ```
 
-### 2. Run PnL attribution
-```bash
-cd <radar_path> && python run_monitor.py --db <radar.db>
-```
-Review delta/gamma/vega/theta/residual breakdown. Flag if residual is unusually large.
+### 2. Review PnL attribution
+Check `logs/monitor.log` or query `pnl_attribution` table for delta/gamma/vega/theta/residual breakdown. Flag if residual is unusually large.
 
 ### 3. Query all positions
 ```bash
