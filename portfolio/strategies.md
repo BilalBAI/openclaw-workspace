@@ -2,6 +2,8 @@
 
 _Standalone option strategies on Deribit._
 
+<!-- Data source: radar trade_log + optimizer results (hedge_results/hedge_result.json) -->
+
 <!-- Format:
 ### [Strategy Name] — [Type: Spread/Straddle/Condor/etc.]
 - Legs:
