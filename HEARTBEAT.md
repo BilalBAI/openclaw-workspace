@@ -14,7 +14,7 @@ Logs: `/home/bilal/.openclaw/workspace/logs/`
 
 ---
 
-## Hourly (Read Cron Results)
+## Every Six Hours (Read Cron Results)
 
 ### 1. Check latest scan results
 Query radar.db for most recent `scan_runs` and `pnl_attribution`:
